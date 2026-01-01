@@ -10,6 +10,10 @@ import Join from "../pages/join/Join";
 import Login from "../pages/login/Login";
 import MyPage from "../pages/mypage/MyPage";
 import NotFound from "../pages/error/NotFound";
+import Tanstack01 from "../pages/tanstack/Tanstack01";
+import Tanstack02 from "../pages/tanstack/Tanstack02";
+import Tanstack03 from "../pages/tanstack/Tanstack03";
+import Tanstack04 from "../pages/tanstack/Tanstack04";
 
 
 const router = createBrowserRouter([
@@ -54,6 +58,22 @@ const router = createBrowserRouter([
  {
   path: "/introduce",
   element: <Introduce />
+ },
+ {
+  path: "/tanstack01",
+  element: <Tanstack01 />
+ },
+ {
+  path: "/tanstack02",
+  element: <Tanstack02 />
+ },
+ {
+  path: "/tanstack03",
+  element: <Tanstack03 />
+ },
+ {
+  path: "/tanstack04",
+  element: <Tanstack04 />
  },
  {
   path: "*",

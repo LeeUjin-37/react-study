@@ -6,34 +6,32 @@ const Join = () => {
 
   const { register, handleSubmit, getValues, formState: { errors, isSubmitted, isSubmitting }} = useForm({mode:"onChange"})
 
-  const join = handleSubmit((data) => {
+  const join = handleSubmit(async (data) => {
     // fetch
-    console.log(data)
-    const {memberEmail, memberPassword} = data
-    // fetch("http://localhost:4000/posts", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     memberEmail: memberEmail,
-    //     memberPassword: memberPassword
-    //   })
-    // })
+    const {memberEmail, memberPassword, memberName} = data
+    console.log(memberEmail)
+    console.log(memberPassword)
+    console.log(memberName)
 
-    // fetch("http://localhost:4000/posts/f995", {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     memberEmail: memberEmail,
-    //     memberPassword: memberPassword
-    //   })
-    // })
-    
-    fetch("http://localhost:4000/posts/ad40", {
-      method: "DELETE"})
+    const member = {
+      memberEmail : memberEmail,
+      memberPassword :  memberPassword,
+      memberName : memberName
+      }
+
+    // 추가 : POST  
+    // 수정 : PUT
+    const response = await fetch("http://localhost:4000/members/1", {
+      method: "PUT",
+      headers: {
+        "Content-type" : "application/json"
+      },
+      body : JSON.stringify(member)
+    })
+
+    if(!response.ok) throw new Error("Data Fetching Error")
+    const datas = await response.json();
+    console.log(datas)
 
   })
 
@@ -105,13 +103,22 @@ const Join = () => {
         )}
         </S.Label>
 
+        <S.Label>
+          <p>이름</p>
+          <input 
+            type="text" 
+            placeholder='이름을 입력하세요'
+            {...register("memberName")}
+          />
+        </S.Label>
+
         {/* 체크박스 */}
-        <div>
+        {/* <div>
           <p>취미</p>
           <label><input type="checkbox" name="hobby" value="soccer" {...register("hobbies")} /><span>축구</span></label>
           <label><input type="checkbox" name="hobby" value="basketball" {...register("hobbies")} /><span>농구</span></label>
           <label><input type="checkbox" name="hobby" value="baseball" {...register("hobbies")} /><span>야구</span></label>
-        </div>
+        </div> */}
 
         <button disabled={isSubmitting}>회원 가입</button>
       </form>

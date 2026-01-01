@@ -11,17 +11,22 @@ import { Route, RouterProvider, Routes } from 'react-router-dom';
 import Main from './pages/main/Main';
 import Intro from './pages/intro/Intro';
 import router from './routes/router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 
 function App() {
+
+  const queryClient = new QueryClient()
+
   return (
     <> 
-    <ThemeProvider theme={theme}>
-    <GlobalStyle /> { /* 삭제 하지 마세요! */}
-    <RouterProvider router={router}/>
-    </ThemeProvider>
-    {/* <ProductContainer /> */}
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle /> { /* 삭제 하지 마세요! */}
+        <RouterProvider router={router}/>
+      </ThemeProvider>
+    </QueryClientProvider>
     </>
   );
 }
